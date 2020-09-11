@@ -1,0 +1,37 @@
+.Terminal{
+    color: white;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.TerminalBreak{
+    display: block;
+    margin-top: 10px;
+}
+
+.skip{
+    color: white;
+    position: absolute;
+    bottom: 0;
+    right: 3%;
+    min-width: 80px;
+    font-size: 20px;
+    transition: .2s;
+}
+
+.skip:hover{
+    opacity: .5;
+    cursor: pointer;
+}
+
+.cursor {
+    display: inline;
+    border-left: .1em solid white;
+    animation: blink .7s steps(1) infinite;
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
