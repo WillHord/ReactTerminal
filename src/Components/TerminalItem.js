@@ -69,15 +69,11 @@ class TerminalItem extends React.Component{
 
         if(this.props.skip){
             if(this.props.shouldDelete){
-                return(
-                    <>
-                        <span className={this.props.className}></span>
-                    </>
-                )
+                return(<></>)
             } else {
                 return(
                     <>
-                        <span 
+                        <span
                         className={this.props.className}
                         style={{display: this.props.newline ? 'inline':'block'}}>
                             {this.state.prefix}{this.props.children.props.children}
