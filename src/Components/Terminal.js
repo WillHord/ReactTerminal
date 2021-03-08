@@ -24,7 +24,7 @@ class Terminal extends React.Component{
         this.handleGlobals = this.handleGlobals.bind(this);
         this.handleSkip = this.handleSkip.bind(this);
 
-        this.numberOfItems = this.props.children.length - this.props.children.filter(child => child.type.name === 'TerminalSkip').length;
+        this.numberOfItems = this.props.children.length - this.props.children.filter(child => child.type === TerminalSkip).length;
 
         this.props.children.forEach((child, index) => this[`child-${index}`] = React.createRef());
     }
@@ -32,7 +32,7 @@ class Terminal extends React.Component{
     handleSkip(){
         const childNumber = this.state.childNumber;
         if(childNumber < this.numberOfItems){
-            if(this.props.children[childNumber] && this.props.children[childNumber].type.name === 'TerminalItem'){
+            if(this.props.children[childNumber] && this.props.children[childNumber].type === TerminalItem){
                 this.setState({skipped: true})
                 this.handleGlobals(this[`child-${childNumber}`])
             } else if(this.props.children[childNumber]){
@@ -65,7 +65,7 @@ class Terminal extends React.Component{
 
     handleTyping(){
         const childNumber = this.state.childNumber;
-        if(childNumber < this.numberOfItems && this.props.children[childNumber].type.name !== 'TerminalItem'){
+        if(childNumber < this.numberOfItems && this.props.children[childNumber].type !== TerminalItem){
             this.setState({childNumber: this.state.childNumber + 1});
             this.handleTyping();
         } else if(childNumber < this.numberOfItems && !this.state.skipped){
@@ -84,7 +84,7 @@ class Terminal extends React.Component{
         return(
             <>
             {this.props.children.map((child, index) => {
-            if(child.type.name === 'TerminalItem')
+            if(child.type === TerminalItem)
                     return <TerminalItem
                         key={`child-${index.toString()}`}
                         lineComplete={this.handleTyping}
@@ -97,7 +97,7 @@ class Terminal extends React.Component{
                         >
                             {child}
                         </TerminalItem>
-            if(child.type.name === 'TerminalSkip')
+            if(child.type === TerminalSkip)
                     return <TerminalSkip
                         key={`child-${this.props.children.indexOf(child).toString()}`}
                         ref={(ref) => {this[`child-${this.props.children.indexOf(child)}`] = ref;}}
